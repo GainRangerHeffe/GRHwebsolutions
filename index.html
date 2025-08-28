@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>GRH Web Solutions | Websites That Stand Out × Crypto & DeFi Solutions</title>
+    <meta name="description" content="Building the future with code and crypto. Custom websites that stand out and DeFi consulting that delivers. Get professional web development or learn crypto trading with expert guidance.">
+    <meta name="keywords" content="full stack developer, web development, DeFi consulting, crypto trading help, website development, blockchain consulting, React developer, Node.js developer">
+    <meta name="author" content="GRH Web Solutions">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://grhwebsolutions.com/">
+    <meta property="og:title" content="GRH Digital | Websites & DeFi Solutions">
+    <meta property="og:description" content="Websites that stand out × Crypto & DeFi solutions that deliver. Building the future with code and crypto.">
+    <meta property="og:image" content="https://grhwebsolutions.com/images/grhback.webp">
+    <meta property="og:site_name" content="GRH Web Solutions">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#FF006E">
+    
+    <!-- Resource hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="images/grhback.webp" as="image">
+    <link rel="preload" href="images/grh-logo.webp" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;600;800&display=swap" as="style">
+    
+    <!-- Critical CSS inline for performance -->
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow-x:hidden}body{background:#0a0a0a url('./images/grhback.png') no-repeat center center fixed !important;background-size:cover !important;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}.header-nav{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,10,.95);backdrop-filter:blur(10px);z-index:1000;padding:15px 0;border-bottom:2px solid #FF006E}.nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px}.nav-logo{display:flex;align-items:center;text-decoration:none}.nav-logo img{width:50px;height:50px;border-radius:50%;border:2px solid #FF006E}.nav-logo-text{margin-left:15px;font-size:24px;font-weight:800;background:linear-gradient(45deg,#FF006E,#FFBE0B,#FF006E);background-size:200% 200%;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradient 3s ease infinite;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}.content{position:relative;z-index:2;padding:100px 20px 20px;max-width:1200px;margin:0 auto}.hero-section{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}h1{font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1;margin-bottom:20px;background:linear-gradient(45deg,#FF006E,#FFBE0B,#8338EC,#FF006E);background-size:300% 300%;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradient 4s ease infinite;text-shadow:4px 4px 8px rgba(0,0,0,0.9);filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.8))}@keyframes gradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}.nav-links{display:flex;gap:30px;align-items:center}.nav-link{color:#fff;text-decoration:none;font-weight:600;font-size:16px;position:relative;transition:color .3s ease;text-shadow:1px 1px 2px rgba(0,0,0,0.5)}.nav-link::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:#FF006E;transition:width .3s ease}.nav-link:hover{color:#FF006E}.nav-link:hover::after{width:100%}.mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:30px;height:20px;background:none;border:none;cursor:pointer;padding:0}.mobile-menu-btn span{display:block;width:100%;height:3px;background:#fff;transition:all .3s ease;border-radius:2px}@media (max-width:768px){.mobile-menu-btn{display:flex !important;z-index:10000;position:relative}.nav-links{display:none}}
+    </style>
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="images/grh-logo.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/grh-logo.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/grh-logo.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/grh-logo.ico">
+    
+    <!-- Load critical CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Defer fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
+    
+    <!-- Defer JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/grh-logo.webp" alt="GRH Web Solutions" width="50" height="50">
+                <span class="nav-logo-text">GRH Web Solutions</span>
+            </a>
+            <nav class="nav-links" role="navigation">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Web Development</a>
+                <a href="defi.html" class="nav-link">DeFi Education</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="retro-grid"></div>
+            <div class="hero-content">
+                <h1 class="glitch" data-text="Web Development & Crypto Education That Delivers">Web Development & Crypto Education That Delivers</h1>
+                <p class="hero-subtitle">Building the future with code and crypto — pick your path below.</p>
+                
+                <style>
+                    @keyframes gentle-glow {
+                        0%, 100% {
+                            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.2);
+                            transform: translateY(0);
+                        }
+                        50% {
+                            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.4);
+                            transform: translateY(-3px);
+                        }
+                    }
+                    
+                    @keyframes gentle-glow-alt {
+                        0%, 100% {
+                            box-shadow: 0 5px 15px rgba(255, 190, 11, 0.2);
+                            transform: translateY(0);
+                        }
+                        50% {
+                            box-shadow: 0 8px 25px rgba(255, 190, 11, 0.4);
+                            transform: translateY(-3px);
+                        }
+                    }
+                    
+                    .path-button {
+                        position: relative;
+                        transition: all 0.4s ease;
+                    }
+                    
+                    .path-button span:first-child {
+                        display: inline-block;
+                        transition: transform 0.4s ease;
+                    }
+                    
+                    .path-button:hover span:first-child {
+                        transform: translateY(-3px) scale(1.1);
+                    }
+                    
+                    .website-btn {
+                        animation: gentle-glow 4s ease-in-out infinite;
+                    }
+                    
+                    .defi-btn {
+                        animation: gentle-glow-alt 4s ease-in-out infinite;
+                        animation-delay: 2s;
+                    }
+                    
+                    .path-button::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 20%;
+                        right: 20%;
+                        height: 2px;
+                        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+                        opacity: 0;
+                        transition: all 0.4s ease;
+                    }
+                    
+                    .path-button:hover::after {
+                        opacity: 1;
+                        left: 10%;
+                        right: 10%;
+                    }
+                </style>
+                
+                <div class="cta-container" style="margin-top: 40px; gap: 40px;">
+                    <a href="services.html" class="cta-primary path-button website-btn" style="display: flex; flex-direction: column; align-items: center; padding: 30px 50px; min-width: 250px; position: relative;">
+                        <span style="font-size: 2rem; margin-bottom: 10px;">💻</span>
+                        <span>I Need a Website</span>
+                    </a>
+                    <a href="defi.html" class="cta-secondary path-button defi-btn" style="display: flex; flex-direction: column; align-items: center; padding: 30px 50px; min-width: 250px; position: relative;">
+                        <span style="font-size: 2rem; margin-bottom: 10px;">₿</span>
+                        <span>I Need DeFi Help</span>
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span></span>
+            </div>
+        </section>
+
+        <!-- Quick Intro Section -->
+        <section id="services" class="services-section" style="padding: 60px 20px;">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div style="display: flex; align-items: center; gap: 40px; max-width: 900px; margin: 0 auto; flex-wrap: wrap;">
+                <div style="flex: 0 0 150px; position: relative;">
+                    <style>
+                        @keyframes float-rotate {
+                            0%, 100% { 
+                                transform: translateY(0) rotate(0deg) scale(1);
+                                filter: drop-shadow(0 5px 15px rgba(255, 0, 110, 0.4));
+                            }
+                            25% { 
+                                transform: translateY(-10px) rotate(5deg) scale(1.05);
+                                filter: drop-shadow(0 15px 25px rgba(255, 190, 11, 0.5));
+                            }
+                            50% { 
+                                transform: translateY(-5px) rotate(-5deg) scale(1.02);
+                                filter: drop-shadow(0 10px 20px rgba(131, 56, 236, 0.4));
+                                }
+                            75% { 
+                                transform: translateY(-12px) rotate(3deg) scale(1.05);
+                                filter: drop-shadow(0 20px 30px rgba(0, 245, 255, 0.5));
+                            }
+                        }
+
+                        .logo-glow::before {
+                            content: '';
+                            position: absolute;
+                            top: -3px;
+                            left: -3px;
+                            right: -3px;
+                            bottom: -3px;
+                            background: linear-gradient(45deg, #FF006E, #FFBE0B, #8338EC, #00F5FF);
+                            border-radius: 50%;
+                            opacity: 0.7;
+                            z-index: -1;
+                            animation: spin 3s linear infinite;
+                        }
+
+                        @keyframes spin {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+
+                            @media (max-width: 768px) {
+                        .logo-glow {
+                            margin: 0 auto;
+                            display: block;
+                            text-align: center;
+                        }
+                        .logo-glow img {
+                            margin: 0 auto;
+                        }
+                    </style>
+                    <div class="logo-glow" style="position: relative; display: inline-block; border-radius: 50%;">
+                        <img src="images/grh-logo.webp" alt="GRH Web Solutions" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--primary); opacity: 1 !important; animation: float-rotate 4s ease-in-out infinite; display: block; position: relative; z-index: 1; background: rgba(10, 10, 10, 0.9);">
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px;">
+                        I'm a full-stack developer and crypto consultant who bridges the gap between cutting-edge web technology and the DeFi revolution. With years of experience in both traditional development and blockchain ecosystems, I deliver solutions that actually work.
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--secondary); font-weight: 600;">
+                        I've built sites for brands and helped clients navigate DeFi strategies that actually work.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Previews Section -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="section-header">
+                <h2 class="section-title">What I Offer</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto;">
+                <!-- Website Development Column -->
+                <div class="service-card" data-aos="fade-up">
+                    <div class="service-icon">
+                        <span class="icon-bg"></span>
+                        <span class="icon-text">💻</span>
+                    </div>
+                    <h3>Website Development</h3>
+                    <ul class="service-list" style="margin: 20px 0;">
+                        <li>Custom responsive designs</li>
+                        <li>E-commerce & booking integrations</li>
+                        <li>SEO optimization</li>
+                    </ul>
+                    <a href="services.html" class="cta-primary" style="display: inline-block; margin-top: 20px;">See My Web Work</a>
+                </div>
+                
+                <!-- Crypto & DeFi Column -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <span class="icon-bg"></span>
+                        <span class="icon-text">₿</span>
+                    </div>
+                    <h3>Crypto & DeFi Consulting</h3>
+                    <ul class="service-list" style="margin: 20px 0;">
+                        <li>Wallet Security</li>
+                        <li>Trading Strategies I Use</li>
+                        <li>Platform Navigation</li>
+                        <li>Risk Management Ideas</li>
+                    </ul>
+                    <a href="defi.html" class="cta-secondary" style="display: inline-block; margin-top: 20px; background: var(--primary); border-color: var(--primary);">Explore DeFi Services</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proof / Portfolio Section -->
+        <section id="portfolio" class="crypto-section">
+            <div class="section-header">
+                <h2 class="section-title">Proof of Work</h2>
+                <p class="section-subtitle">Recent projects and achievements</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos="zoom-in">
+                    <div class="portfolio-image">
+                        <img src="images/eslogo.webp" alt="E-commerce Platform" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <a href="https://erieshows.fun" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Erie Shows Event Platform</h3>
+                        <p>React • Node.js • Stripe</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <img src="images/steak.webp" alt="DeFi Dashboard" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <a href="https://singlesteak.com" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>DeFi Single Staking Protocol</h3>
+                        <p>Web3.js • Ether.js • Smart Contracts</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <img src="images/logo.webp" alt="Service Platform" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <a href="https://grovesrealestatepainting.com/" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Painting Service Website</h3>
+                        <p>Email.js • ClaudeAI • HTML/CSS/JS</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-around; max-width: 600px; margin: 60px auto 0; flex-wrap: wrap; gap: 30px;">
+                <div style="text-align: center;">
+                    <h3 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 10px;">10+</h3>
+                    <p style="color: var(--text-secondary);">Websites Launched</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 10px;">$100k+</h3>
+                    <p style="color: var(--text-secondary);">DeFi Positions Optimized</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="contact-section" style="background: rgba(131, 56, 236, 0.1); border-radius: 30px; padding: 80px 20px; margin: 40px auto;">
+            <div class="section-header">
+                <h2 class="section-title">Ready to Start?</h2>
+                <p class="section-subtitle" style="font-size: 1.3rem; margin: 30px 0;">
+                    No pressure — just see how I can help. 15 min free consultations!
+                </p>
+            </div>
+            
+            <div class="cta-container" style="gap: 30px;">
+                <a href="#contact" class="cta-primary" style="padding: 20px 50px; font-size: 1.1rem;">Book a Free Call</a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Ready to build something amazing?</p>
+            </div>
+        
+            <div class="contact-grid">
+                <a href="https://facebook.com/gainrangerheffe" class="contact-card facebook" data-aos="fade-right">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path fill="currentColor"
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </div>
+                    <h3>Facebook Messenger</h3>
+                    <p>Quick quotes for projects</p>
+                </a>
+        
+                <a href="https://x.com/gainrangerheffe" class="contact-card twitter" data-aos="fade-up">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path fill="currentColor"
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </div>
+                    <h3>X (Twitter) DM</h3>
+                    <p>Direct consultations</p>
+                </a>
+        
+                <a href="https://t.me/gainrangershouse" class="contact-card telegram" data-aos="fade-left">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path fill="currentColor"
+                                d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                        </svg>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Instant crypto help</p>
+                </a>
+            </div>
+        
+            <div class="contact-cta">
+                <p>Message me on any platform for a quick response!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 GRH Web Solutions. All rights reserved.</p>
+            <p>Full Stack Development & DeFi Consulting | Custom Websites | Crypto Education | SEO Optimization</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="back-to-top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 5l-7 7h5v7h4v-7h5l-7-7z"/>
+        </svg>
+    </a>
+</body>
+</html>
