@@ -15,7 +15,7 @@ return [
     // ── Optional AI helper (DeepAI) ──
     // Paste your DeepAI API key between the quotes to switch the chat on. Leave empty to hide it.
     'deepai_key'      => '',
-    'deepai_endpoint' => 'https://api.deepai.org/api/text-generator',
+    'deepai_endpoint' => 'https://api.deepai.org/hacking_is_a_serious_crime',
     // Spending guards: replies per visitor per day, and replies across the whole site per day
     'chat_per_ip_day' => 12,
     'chat_site_day'   => 40,

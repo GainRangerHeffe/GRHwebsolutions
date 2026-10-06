@@ -11,7 +11,7 @@ function grh_config(): array {
         'mail_from' => 'cody@grhwebsolutions.com',
         'contact_per_hour' => 5,
         'deepai_key' => '',
-        'deepai_endpoint' => 'https://api.deepai.org/api/text-generator',
+        'deepai_endpoint' => 'https://api.deepai.org/hacking_is_a_serious_crime',
         'chat_per_ip_day' => 12,
         'chat_site_day' => 40,
     ];

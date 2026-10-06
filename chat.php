@@ -36,34 +36,35 @@ $system = "You are the friendly website assistant for GRH Web Solutions, run by 
     . "If asked about anything unrelated, politely steer back. When you have enough detail, tell them to press Send My Request, or call or text Cody at 740-319-2431.";
 if ($topic !== '') $system .= " The visitor picked the topic: {$topic}.";
 
-$convo = '';
+$messages = [];
 foreach ($history as $m) {
     if (!is_array($m)) continue;
-    $role = ($m['role'] ?? '') === 'assistant' ? 'Assistant' : 'Visitor';
+    $role = ($m['role'] ?? '') === 'assistant' ? 'assistant' : 'user';
     $text = grh_clean_text((string)($m['content'] ?? ''), 500);
-    if ($text !== '') $convo .= "{$role}: {$text}\n";
+    if ($text !== '') $messages[] = ['role' => $role, 'content' => $text];
 }
-if ($convo === '') grh_json(['error' => 'Say a little about what you need first.'], 422);
-$prompt = $system . "\n\n" . $convo . "Assistant:";
+if (!$messages || $messages[0]['role'] !== 'user') grh_json(['error' => 'Say a little about what you need first.'], 422);
+// The chat API takes no system role, so the instructions ride on the first visitor message
+$messages[0]['content'] = "[Instructions for you, not from the visitor: {$system}]\n\nVisitor: " . $messages[0]['content'];
 
 $ch = curl_init($cfg['deepai_endpoint']);
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => ['text' => $prompt],
+    CURLOPT_POSTFIELDS => ['chat_style' => 'chat', 'chatHistory' => json_encode($messages)],
     CURLOPT_HTTPHEADER => ['api-key: ' . $cfg['deepai_key']],
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT => 25,
+    CURLOPT_TIMEOUT => 30,
     CURLOPT_CONNECTTIMEOUT => 8,
 ]);
 $raw = curl_exec($ch);
 $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
-$data = is_string($raw) ? json_decode($raw, true) : null;
-$reply = is_array($data) ? (string)($data['output'] ?? '') : '';
-// Some models echo the transcript; keep only the assistant's first turn
-$reply = preg_split('/\n\s*(Visitor|Assistant):/', $reply)[0] ?? '';
-$reply = trim(preg_replace('/^Assistant:\s*/', '', $reply));
+// The chat endpoint answers in plain text; tolerate a JSON {"output": ...} body too
+$reply = (string)$raw;
+$data = json_decode($reply, true);
+if (is_array($data)) $reply = (string)($data['output'] ?? '');
+$reply = trim($reply);
 
 if ($code !== 200 || $reply === '') {
     error_log('GRH chat: DeepAI HTTP ' . $code . ' ' . substr((string)$raw, 0, 300));
