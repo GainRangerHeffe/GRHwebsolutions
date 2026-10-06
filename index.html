@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'sha256-tWtsul7V045qVTqbmmI7Z8IFARLhlfOi+XAhVkcadhk=' https://*.googletagmanager.com https://www.googleadservices.com https://www.google.com https://googleads.g.doubleclick.net; connect-src https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://*.google.com https://pagead2.googlesyndication.com https://www.googleadservices.com; frame-src https://td.doubleclick.net https://www.googletagmanager.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'sha256-q5xOMpFgiBXCfyZss4IpuixnPGFCY+r4RqcYt+mOSkA=' 'sha256-tWtsul7V045qVTqbmmI7Z8IFARLhlfOi+XAhVkcadhk=' https://*.googletagmanager.com https://www.googleadservices.com https://www.google.com https://googleads.g.doubleclick.net; connect-src https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://*.google.com https://pagead2.googlesyndication.com https://www.googleadservices.com; frame-src https://td.doubleclick.net https://www.googletagmanager.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
@@ -37,7 +37,6 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
 
     <link rel="icon" type="image/png" href="images/ico.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/ico.png">
@@ -146,13 +145,7 @@
             <div class="container">
                 <div class="about-inner">
                     <div class="about-photo">
-                        <!-- Replace the div below with: <img src="images/cody.jpg" alt="Cody, founder of GRH Web Solutions" class="about-photo-img"> -->
-                        <div class="about-photo-wrap" aria-hidden="true">
-                            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="40" cy="30" r="18" stroke="currentColor" stroke-width="2.5"/>
-                                <path d="M8 72c0-17.673 14.327-32 32-32s32 14.327 32 32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                        <img src="images/me.jpg" alt="Cody, founder of GRH Web Solutions" class="about-photo-img" loading="lazy" decoding="async" width="260" height="260">
                     </div>
                     <div class="about-text">
                         <span class="section-tag">About</span>
