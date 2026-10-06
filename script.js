@@ -204,46 +204,53 @@ document.addEventListener('DOMContentLoaded', function () {
       return !first;
     }
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!validate()) return;
-      status.className = 'form-status';
-      status.textContent = 'Sending…';
-      submit.disabled = true;
-      fetch(form.getAttribute('action'), {
+    // Posts the form and swaps it for a thank-you message. Used by the
+    // Send button and by the AI helper's "Send this chat" button.
+    function sendRequest(statusEl, btn, source) {
+      statusEl.className = statusEl.className.replace(/\s*(ok|err)\b/g, '');
+      statusEl.textContent = 'Sending…';
+      btn.disabled = true;
+      return fetch(form.getAttribute('action'), {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (res) {
-          if (res && res.ok) {
-            track('generate_lead', { form_id: 'quote', topic: topic.value });
-            const firstName = (form.querySelector('#q-name').value.trim().split(' ')[0] || '').slice(0, 40);
-            const box = document.createElement('div');
-            box.className = 'quote-success';
-            box.setAttribute('role', 'status');
-            box.tabIndex = -1;
-            const h = document.createElement('h2');
-            h.textContent = 'Thanks' + (firstName ? ', ' + firstName : '') + '!';
-            const p = document.createElement('p');
-            p.textContent = 'Your request is in. Cody will reach out soon. Need it faster? Call or text 740-319-2431.';
-            const a = document.createElement('a');
-            a.href = 'tel:+17403192431'; a.className = 'btn-primary'; a.textContent = 'Call Now';
-            box.append(h, p, a);
-            form.replaceChildren(box);
-            box.focus();
-          } else {
-            throw new Error((res && res.error) || 'send failed');
-          }
+          if (!res || !res.ok) throw new Error((res && res.error) || 'send failed');
+          track('generate_lead', { form_id: 'quote', topic: topic.value || 'AI chat', method: source });
+          const firstName = (form.querySelector('#q-name').value.trim().split(' ')[0] || '').slice(0, 40);
+          const box = document.createElement('div');
+          box.className = 'quote-success';
+          box.setAttribute('role', 'status');
+          box.tabIndex = -1;
+          const h = document.createElement('h2');
+          h.textContent = 'Thanks' + (firstName ? ', ' + firstName : '') + '!';
+          const p = document.createElement('p');
+          p.textContent = source === 'ai_chat'
+            ? 'Cody has your whole conversation and will reach out soon. Need it faster? Call or text 740-319-2431.'
+            : 'Your request is in. Cody will reach out soon. Need it faster? Call or text 740-319-2431.';
+          const a = document.createElement('a');
+          a.href = 'tel:+17403192431'; a.className = 'btn-primary'; a.textContent = 'Call Now';
+          box.append(h, p, a);
+          form.replaceChildren(box);
+          box.focus();
         })
         .catch(function (err) {
-          submit.disabled = false;
-          status.className = 'form-status err';
-          status.textContent = (err && err.message && err.message !== 'send failed' && err.message.length < 160)
+          btn.disabled = false;
+          statusEl.className += ' err';
+          statusEl.textContent = (err && err.message && err.message !== 'send failed' && err.message.length < 160)
             ? err.message
             : 'Sorry, that didn’t send. Please call or text 740-319-2431, or email cody@grhwebsolutions.com.';
         });
+    }
+    form.sendRequest = sendRequest;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+      status.className = 'form-status';
+      sendRequest(status, submit, 'form');
     });
 
     initAiHelper(form);
@@ -257,6 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('aiInput');
     const send = document.getElementById('aiSend');
     const use = document.getElementById('aiUse');
+    const useStatus = document.getElementById('aiUseStatus');
     if (!toggle || !panel) return;
     const history = [];
 
@@ -317,18 +325,19 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Enter') { e.preventDefault(); ask(); }
     });
 
+    // Sends the whole conversation to Cody. Name/email are optional here:
+    // the helper asks for contact details in the chat itself.
     use.addEventListener('click', function () {
       const transcript = history.map(function (m) {
-        return (m.role === 'user' ? 'Me: ' : 'AI helper: ') + m.content;
+        return (m.role === 'user' ? 'Visitor: ' : 'AI helper: ') + m.content;
       }).join('\n');
-      form.querySelector('#q-chat').value = transcript.slice(0, 4000);
+      form.querySelector('#q-chat').value = transcript.slice(0, 6000);
       const msg = form.querySelector('#q-message');
-      const mine = history.filter(function (m) { return m.role === 'user'; }).map(function (m) { return m.content; }).join(' ');
-      if (!msg.value.trim()) msg.value = mine.slice(0, 2000);
-      msg.dispatchEvent(new Event('input', { bubbles: true }));
-      use.textContent = 'Added. The full chat will be included with your request.';
-      use.disabled = true;
-      msg.focus();
+      if (!msg.value.trim()) {
+        msg.value = history.filter(function (m) { return m.role === 'user'; })
+          .map(function (m) { return m.content; }).join(' ').slice(0, 2000);
+      }
+      form.sendRequest(useStatus, use, 'ai_chat');
     });
   }
 

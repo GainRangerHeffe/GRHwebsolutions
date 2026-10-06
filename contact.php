@@ -32,49 +32,59 @@ $phone   = grh_clean_line((string)($_POST['phone'] ?? ''), 30);
 $topic   = grh_clean_line((string)($_POST['topic'] ?? ''), 60);
 $detail  = grh_clean_line((string)($_POST['detail'] ?? ''), 80);
 $message = grh_clean_text((string)($_POST['message'] ?? ''), 2000);
-$chat    = grh_clean_text((string)($_POST['chat'] ?? ''), 4000);
+$chat    = grh_clean_text((string)($_POST['chat'] ?? ''), 6000);
 
 $topics = ['New website', 'Website redesign or fix', 'Social media management', 'Social media ads and marketing',
            'AI automation or chatbot', 'DeFi education', 'Something else'];
 
-if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($message) < 5) {
+$fromChat = $chat !== '';
+if ($fromChat) {
+    // Sent straight from the AI helper: the conversation carries the context and
+    // usually the visitor's contact details, so the form fields are optional.
+    if ($name === '') $name = 'Website visitor (AI chat)';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $email = '';
+} elseif ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($message) < 5) {
     finish(false, 'Please fill in your name, a valid email and a short message.', 422);
 }
-if (!in_array($topic, $topics, true)) $topic = 'Something else';
+if (!in_array($topic, $topics, true)) $topic = $fromChat ? 'AI chat' : 'Something else';
 
 // Link-stuffed messages are almost always spam
 if (preg_match_all('#https?://#i', $message . ' ' . $chat) > 3) finish(true);
 
-$subject = 'New quote request: ' . $topic . ' from ' . $name;
+$subject = $fromChat
+    ? 'New AI chat lead' . ($topic !== 'AI chat' ? ': ' . $topic : '') . ($name !== 'Website visitor (AI chat)' ? ' from ' . $name : '')
+    : 'New quote request: ' . $topic . ' from ' . $name;
 $lines = [
     "New request from grhwebsolutions.com",
     "",
     "Name:    $name",
-    "Email:   $email",
+    "Email:   " . ($email !== '' ? $email : '(not given, check the chat below)'),
     "Phone:   " . ($phone !== '' ? $phone : '(not given)'),
     "Topic:   $topic" . ($detail !== '' ? " / $detail" : ''),
     "",
-    "What they need:",
-    $message,
 ];
+if ($message !== '') {
+    $lines[] = "What they need:";
+    $lines[] = $message;
+}
 if ($chat !== '') {
     $lines[] = "";
-    $lines[] = "AI helper chat before sending:";
+    $lines[] = "Full AI helper conversation:";
     $lines[] = $chat;
 }
 $lines[] = "";
-$lines[] = "Sent " . date('Y-m-d H:i T') . " · reply to this email to answer them directly.";
+$lines[] = "Sent " . date('Y-m-d H:i T') . ($email !== '' ? " · reply to this email to answer them directly." : '');
 $body = implode("\n", $lines);
 
 $from = $cfg['mail_from'];
 $headers = [
     'From: GRH Website <' . $from . '>',
-    'Reply-To: ' . (str_replace(['"', '<', '>'], '', $name)) . ' <' . $email . '>',
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
     'Content-Transfer-Encoding: 8bit',
     'X-Mailer: GRH-Web-Form',
 ];
+if ($email !== '') $headers[] = 'Reply-To: ' . str_replace(['"', '<', '>'], '', $name) . ' <' . $email . '>';
 $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 $sent = @mail($cfg['mail_to'], $encodedSubject, $body, implode("\r\n", $headers), '-f' . $from);
 

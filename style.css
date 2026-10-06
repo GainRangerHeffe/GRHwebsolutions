@@ -739,7 +739,8 @@ img { max-width: 100%; display: block; }
 }
 .ai-send { background: var(--secondary); color: #fff; border: none; padding: 0 16px; }
 .ai-send[disabled] { opacity: .6; cursor: progress; }
-.ai-use { width: 100%; margin-top: 8px; background: transparent; color: var(--accent); border: 1px solid rgb(240 192 64 / .5); padding: 8px 12px; }
+.ai-use { width: 100%; margin-top: 10px; background: var(--accent); color: #111; border: 2px solid var(--accent); padding: 10px 12px; }
+.ai-use[disabled] { opacity: .65; cursor: progress; }
 .ai-use[hidden] { display: none; }
 .ai-note { font-size: .74rem; color: var(--text-secondary); margin-top: 8px; }
 
