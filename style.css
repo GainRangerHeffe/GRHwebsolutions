@@ -1,13 +1,13 @@
 /* ─── DESIGN TOKENS ─── */
 :root {
-  --primary: #D4A820;       /* warm gold  — matches logo circuit G */
-  --secondary: #5B8DB8;     /* steel blue — matches "WEB SOLUTIONS" */
-  --tertiary: #1B3A5C;      /* deep navy  — depth accent */
-  --bg-dark: #0a0a0a;
-  --bg-mid: #0f0f0f;
-  --bg-light: #141414;
+  --primary: #D4A017;       /* warm gold  — matches logo circuit G / card gold */
+  --secondary: #4A7FB5;     /* steel blue — matches "WEB SOLUTIONS" / logo blue */
+  --tertiary: #16324F;      /* deep navy  — depth accent, matches card navy */
+  --bg-dark: #0A1524;       /* deep navy  — matches business card background */
+  --bg-mid: #0D1E32;
+  --bg-light: #122A44;
   --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
+  --text-secondary: #9FB1C4;
   --accent: #F0C040;        /* bright gold highlight */
   --radius: 16px;
   --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -44,13 +44,13 @@ img { max-width: 100%; display: block; }
 /* ─── NAV ─── */
 .header-nav {
   position: fixed; top: 0; left: 0; width: 100%;
-  background: rgb(8 8 8 / .97);
+  background: rgb(6 14 24 / .97);
   border-bottom: 2px solid var(--primary);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   z-index: 1000; height: 70px;
   transition: height 0.3s ease, background 0.3s ease;
 }
-.header-nav.scrolled { height: 62px; background: rgb(5 5 5 / .99); }
+.header-nav.scrolled { height: 62px; background: rgb(4 10 18 / .99); }
 
 .nav-container {
   display: flex; justify-content: space-between; align-items: center;
@@ -256,7 +256,7 @@ img { max-width: 100%; display: block; }
 .defi-section { padding: 96px 0; width: 100%; }
 
 .portfolio-section { background: var(--bg-mid); }
-.process-section { background: #070a0e; }
+.process-section { background: #071220; }
 .defi-alt-section { padding: 96px 0; width: 100%; background: var(--bg-light); }
 
 .section-header { text-align: center; margin-bottom: 56px; }
@@ -385,7 +385,7 @@ img { max-width: 100%; display: block; }
 
 .portfolio-overlay {
   position: absolute; inset: 0;
-  background: rgb(27 58 92 / .88);
+  background: rgb(22 50 79 / .9);
   display: flex; align-items: center; justify-content: center;
   transition: opacity 0.3s ease;
 }
@@ -420,7 +420,7 @@ img { max-width: 100%; display: block; }
 .cta-inner {
   display: flex; align-items: center; justify-content: space-between;
   gap: 40px; flex-wrap: wrap;
-  background: #0d1117; border: 1px solid rgba(212,168,32,.2);
+  background: #0C1A2C; border: 1px solid rgba(212,168,32,.2);
   border-radius: 20px; padding: 52px 56px;
   position: relative; overflow: hidden;
 }
@@ -456,7 +456,7 @@ img { max-width: 100%; display: block; }
 .contact-card:hover .contact-arrow { transform: translateX(4px); }
 
 /* ─── ABOUT ─── */
-.about-section { padding: 96px 0; background: #070a0e; }
+.about-section { padding: 96px 0; background: #071220; }
 .about-inner {
   display: grid; grid-template-columns: 300px 1fr; gap: 72px; align-items: center;
 }
@@ -470,7 +470,7 @@ img { max-width: 100%; display: block; }
 .about-photo-wrap svg { width: 80px; height: 80px; }
 .about-photo-img {
   width: 260px; height: 260px; border-radius: 50%;
-  object-fit: cover; object-position: top;
+  object-fit: cover; object-position: center 45%;
   border: 3px solid var(--primary);
   box-shadow: 0 0 40px rgb(212 168 32 / .15);
 }
@@ -481,7 +481,7 @@ img { max-width: 100%; display: block; }
 .about-text .btn-primary { margin-top: 8px; display: inline-block; }
 
 /* ─── FOOTER ─── */
-.footer { background: #0d0d0d; border-top: 1px solid rgb(212 168 32 / .2); padding: 40px 0; }
+.footer { background: #070F1A; border-top: 1px solid rgb(212 168 32 / .2); padding: 40px 0; }
 .footer-inner {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 24px;
@@ -588,7 +588,7 @@ img { max-width: 100%; display: block; }
   .nav-links {
     display: none; position: fixed;
     top: 70px; left: 16px; right: 16px;
-    background: rgb(10 10 10 / .97); backdrop-filter: blur(12px);
+    background: rgb(8 17 28 / .97); backdrop-filter: blur(12px);
     border: 2px solid var(--primary); border-radius: 18px;
     flex-direction: column; padding: 24px; gap: 16px;
     z-index: 9999; box-shadow: 0 20px 40px rgb(0 0 0 / .5);

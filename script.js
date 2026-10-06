@@ -1,3 +1,11 @@
+// Load fonts non-blocking (avoids render-blocking stylesheet)
+(function () {
+  var l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.href = 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap';
+  document.head.appendChild(l);
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // Scroll to top on fresh load only (not when arriving via anchor link)
@@ -48,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.addEventListener('scroll', throttle(updateHeader, 16));
 
+  // Cache header height to avoid forced reflow on every click
+  let cachedHeaderHeight = header ? header.offsetHeight : 70;
+  window.addEventListener('resize', throttle(function () {
+    if (header) cachedHeaderHeight = header.offsetHeight;
+  }, 200));
+
   // ─── SMOOTH SCROLL ───
   document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
     link.addEventListener('click', function (e) {
@@ -55,8 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const target = document.getElementById(targetId);
       if (target) {
         e.preventDefault();
-        const headerHeight = header ? header.offsetHeight : 70;
-        const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+        const top = target.getBoundingClientRect().top + window.scrollY - cachedHeaderHeight - 16;
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });
