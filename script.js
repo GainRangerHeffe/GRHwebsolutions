@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const a = document.createElement('a');
           a.href = 'tel:+17403192431'; a.className = 'btn-primary'; a.textContent = 'Call Now';
           box.append(h, p, a);
-          form.replaceChildren(box);
+          (document.getElementById('quoteCard') || form).replaceChildren(box);
           box.focus();
         })
         .catch(function (err) {
@@ -258,29 +258,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ─── AI HELPER (optional, server-side DeepAI proxy) ───
   function initAiHelper(form) {
-    const toggle = document.getElementById('aiToggle');
     const panel = document.getElementById('aiPanel');
     const log = document.getElementById('aiLog');
     const input = document.getElementById('aiInput');
     const send = document.getElementById('aiSend');
     const use = document.getElementById('aiUse');
     const useStatus = document.getElementById('aiUseStatus');
-    if (!toggle || !panel) return;
+    const formToggle = document.getElementById('formToggle');
+    const sub = document.getElementById('quoteSub');
+    if (!panel) return;
     const history = [];
 
-    // Only show the helper when the server says it's switched on
+    function showForm(open) {
+      form.hidden = !open;
+      if (formToggle) formToggle.setAttribute('aria-expanded', String(open));
+    }
+
+    // Chat-first when the server has the assistant switched on; otherwise the form stays as is
     fetch('chat.php?status=1', { headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (res) { if (res && res.enabled) toggle.hidden = false; })
+      .then(function (res) {
+        if (!res || !res.enabled) return;
+        panel.hidden = false;
+        showForm(false);
+        if (formToggle) formToggle.hidden = false;
+        if (sub) sub.textContent = 'Chat with my AI assistant about your project. When you’re ready, it sends the whole conversation to Cody.';
+      })
       .catch(function () {});
 
-    toggle.addEventListener('click', function () {
-      const open = panel.hidden;
-      panel.hidden = !open;
-      toggle.setAttribute('aria-expanded', String(open));
-      if (open) { input.focus(); track('ai_chat_open', {}); }
-    });
+    if (formToggle) {
+      formToggle.addEventListener('click', function () {
+        const open = form.hidden;
+        showForm(open);
+        if (open) form.querySelector('#q-name').focus();
+      });
+    }
 
+    let started = false;
     function addMsg(text, who) {
       const p = document.createElement('p');
       p.className = 'ai-msg ' + (who === 'user' ? 'ai-user' : 'ai-bot');
@@ -294,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const text = input.value.trim();
       if (!text || send.disabled) return;
       input.value = '';
+      if (!started) { started = true; track('ai_chat_start', {}); }
       addMsg(text, 'user');
       history.push({ role: 'user', content: text });
       const typing = addMsg('Thinking…', 'bot');
@@ -311,12 +326,14 @@ document.addEventListener('DOMContentLoaded', function () {
             history.push({ role: 'assistant', content: res.reply });
             use.hidden = false;
           } else {
-            addMsg((res && res.error) || 'The helper is unavailable right now. You can still send your request below.', 'bot');
+            addMsg((res && res.error) || 'The assistant is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
+            showForm(true);
           }
         })
         .catch(function () {
           typing.remove();
-          addMsg('The helper is unavailable right now. You can still send your request below.', 'bot');
+          addMsg('The assistant is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
+          showForm(true);
         })
         .finally(function () { send.disabled = false; input.focus(); });
     }

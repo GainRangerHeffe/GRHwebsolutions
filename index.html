@@ -47,8 +47,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=20261006b">
+    <script src="script.js?v=20261006b" defer></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -176,12 +176,29 @@
 
             <!-- Quick quote form -->
             <div class="hero-visual" id="quote">
-                <form class="quote-card" id="quoteForm" action="contact.php" method="post" novalidate aria-labelledby="quote-heading">
+                <div class="quote-card" id="quoteCard">
                     <div class="quote-head">
                         <h2 id="quote-heading">Get a free quote</h2>
-                        <p>Tell me what you need. I'll get back to you quickly.</p>
+                        <p id="quoteSub">Tell me what you need. I'll get back to you quickly.</p>
                     </div>
 
+                    <div class="ai-panel" id="aiPanel" hidden>
+                        <div class="ai-log" id="aiLog" role="log" aria-live="polite" aria-label="Conversation with the AI assistant">
+                            <p class="ai-msg ai-bot">Hi! I'm Cody's AI assistant. What kind of business do you have, and what are you hoping to get help with?</p>
+                        </div>
+                        <div class="ai-input">
+                            <label for="aiInput" class="sr-only">Message the AI assistant</label>
+                            <input id="aiInput" type="text" maxlength="500" placeholder="e.g. I run a bakery and need more customers" autocomplete="off">
+                            <button type="button" id="aiSend" class="ai-send">Send</button>
+                        </div>
+                        <button type="button" id="aiUse" class="ai-use" hidden>Send this chat to Cody</button>
+                        <p class="form-status" id="aiUseStatus" role="status" aria-live="polite"></p>
+                        <p class="ai-note">AI answers can be wrong. Cody reads every conversation personally.</p>
+                    </div>
+
+                    <button type="button" class="form-toggle" id="formToggle" aria-expanded="false" aria-controls="quoteForm" hidden>Prefer a form? Fill out a quick request instead</button>
+
+                    <form class="quote-form" id="quoteForm" action="contact.php" method="post" novalidate aria-labelledby="quote-heading">
                     <div class="field-row">
                         <div class="field">
                             <label for="q-name">Name</label>
@@ -232,28 +249,12 @@
                     <input type="hidden" name="ts" id="q-ts" value="">
                     <input type="hidden" name="chat" id="q-chat" value="">
 
-                    <button type="button" class="ai-toggle" id="aiToggle" aria-expanded="false" aria-controls="aiPanel" hidden>
-                        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2zm7 12l.95 2.55L22.5 17.5l-2.55.95L19 21l-.95-2.55L15.5 17.5l2.55-.95L19 14z"/></svg>
-                        Not sure what you need? Chat with my AI helper first
-                    </button>
-                    <div class="ai-panel" id="aiPanel" hidden>
-                        <div class="ai-log" id="aiLog" role="log" aria-live="polite" aria-label="AI helper conversation">
-                            <p class="ai-msg ai-bot">Hi! Tell me a little about your business and what you're hoping to fix or grow. I'll help you narrow it down, then you can send it all to Cody in one message.</p>
-                        </div>
-                        <div class="ai-input">
-                            <label for="aiInput" class="sr-only">Message the AI helper</label>
-                            <input id="aiInput" type="text" maxlength="500" placeholder="e.g. I run a bakery and need more customers" autocomplete="off">
-                            <button type="button" id="aiSend" class="ai-send">Send</button>
-                        </div>
-                        <button type="button" id="aiUse" class="ai-use" hidden>Send this chat to Cody</button>
-                        <p class="form-status" id="aiUseStatus" role="status" aria-live="polite"></p>
-                        <p class="ai-note">AI answers can be wrong. Cody reviews every request personally.</p>
-                    </div>
+                        <button type="submit" class="btn-primary quote-submit" id="quoteSubmit">Send My Request</button>
+                        <p class="form-status" id="quoteStatus" role="status" aria-live="polite"></p>
+                    </form>
 
-                    <button type="submit" class="btn-primary quote-submit" id="quoteSubmit">Send My Request</button>
-                    <p class="form-status" id="quoteStatus" role="status" aria-live="polite"></p>
                     <p class="quote-alt">Rather talk? <a href="tel:+17403192431" data-track="call">Call</a> or <a href="sms:+17403192431" data-track="text">text</a> 740-319-2431</p>
-                </form>
+                </div>
             </div>
         </section>
 
