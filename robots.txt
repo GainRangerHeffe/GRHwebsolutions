@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /contact.php
+Disallow: /chat.php
+Disallow: /thanks.html
+
+Sitemap: https://grhwebsolutions.com/sitemap.xml

@@ -114,6 +114,255 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // ─── CALL / TEXT TRACKING ───
+  document.querySelectorAll('[data-track]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      track(el.getAttribute('data-track') === 'call' ? 'click_call' : 'click_text', { link_url: el.getAttribute('href') });
+    });
+  });
+
+  // ─── QUOTE FORM ───
+  const form = document.getElementById('quoteForm');
+  if (form) initQuoteForm(form);
+
+  function initQuoteForm(form) {
+    const DETAILS = {
+      'New website': ['Brand-new site for my business', 'Landing page for an offer or campaign', 'Online store / e-commerce', 'Booking or appointment site', 'Not sure yet'],
+      'Website redesign or fix': ['Refresh an outdated design', 'Make it faster and mobile-friendly', 'Get found on Google (SEO)', 'Fix something broken', 'Ongoing updates and maintenance'],
+      'Social media management': ['Done-for-you posting and content', 'Grow followers and engagement', 'Set up or clean up my profiles', 'Content strategy and calendar', 'Monthly reporting'],
+      'Social media ads and marketing': ['Facebook / Instagram ads', 'TikTok ads', 'Lead generation campaign', 'Promote an event or launch', 'Not sure, need advice'],
+      'AI automation or chatbot': ['Chatbot for my website', 'Automate lead follow-up', 'Connect my tools (CRM, email, calendar)', 'Content automation', 'Something custom'],
+      'DeFi education': ['Wallet setup and security', 'Staking and DeFi basics', 'Navigating DEXs and platforms', '1-on-1 session']
+    };
+    const topic = form.querySelector('#q-topic');
+    const detail = form.querySelector('#q-detail');
+    const detailWrap = form.querySelector('#q-detail-wrap');
+    const status = form.querySelector('#quoteStatus');
+    const submit = form.querySelector('#quoteSubmit');
+    const ts = form.querySelector('#q-ts');
+    if (ts) ts.value = String(Date.now());
+    let started = false;
+
+    function fillDetails() {
+      const opts = DETAILS[topic.value] || [];
+      detail.innerHTML = '<option value="">Choose one (optional)</option>';
+      opts.forEach(function (o) {
+        const op = document.createElement('option');
+        op.value = o; op.textContent = o;
+        detail.appendChild(op);
+      });
+      detailWrap.hidden = opts.length === 0;
+    }
+    topic.addEventListener('change', fillDetails);
+
+    // Pre-select topic from ?topic= (used by "Get Started" buttons on other pages)
+    const preset = new URLSearchParams(window.location.search).get('topic');
+    if (preset && Array.prototype.some.call(topic.options, function (o) { return o.value === preset; })) {
+      topic.value = preset;
+      fillDetails();
+    }
+
+    form.addEventListener('input', function () {
+      if (!started) { started = true; track('form_start', { form_id: 'quote' }); }
+    }, { once: false });
+
+    function setError(field, msg) {
+      field.setAttribute('aria-invalid', 'true');
+      let err = document.getElementById(field.id + '-err');
+      if (!err) {
+        err = document.createElement('span');
+        err.className = 'field-error';
+        err.id = field.id + '-err';
+        field.insertAdjacentElement('afterend', err);
+      }
+      err.textContent = msg;
+      field.setAttribute('aria-describedby', err.id);
+    }
+    function clearError(field) {
+      field.removeAttribute('aria-invalid');
+      field.removeAttribute('aria-describedby');
+      const err = document.getElementById(field.id + '-err');
+      if (err) err.remove();
+    }
+    ['q-name', 'q-email', 'q-topic', 'q-message'].forEach(function (id) {
+      const f = document.getElementById(id);
+      f.addEventListener('input', function () { clearError(f); });
+      f.addEventListener('change', function () { clearError(f); });
+    });
+
+    function validate() {
+      let first = null;
+      const name = form.querySelector('#q-name');
+      const email = form.querySelector('#q-email');
+      const msg = form.querySelector('#q-message');
+      [name, email, topic, msg].forEach(clearError);
+      if (!name.value.trim()) { setError(name, 'Please enter your name.'); first = first || name; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { setError(email, 'Please enter a valid email so I can reply.'); first = first || email; }
+      if (!topic.value) { setError(topic, 'Pick the closest topic.'); first = first || topic; }
+      if (msg.value.trim().length < 5) { setError(msg, 'A sentence or two about what you need helps a lot.'); first = first || msg; }
+      if (first) first.focus();
+      return !first;
+    }
+
+    // Posts the form and swaps it for a thank-you message. Used by the
+    // Send button and by Webster's "Send this chat" button.
+    function sendRequest(statusEl, btn, source) {
+      statusEl.className = statusEl.className.replace(/\s*(ok|err)\b/g, '');
+      statusEl.textContent = 'Sending…';
+      btn.disabled = true;
+      return fetch(form.getAttribute('action'), {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+        .then(function (res) {
+          if (!res || !res.ok) throw new Error((res && res.error) || 'send failed');
+          track('generate_lead', { form_id: 'quote', topic: topic.value || 'AI chat', method: source });
+          const firstName = (form.querySelector('#q-name').value.trim().split(' ')[0] || '').slice(0, 40);
+          const box = document.createElement('div');
+          box.className = 'quote-success';
+          box.setAttribute('role', 'status');
+          box.tabIndex = -1;
+          const h = document.createElement('h2');
+          h.textContent = 'Thanks' + (firstName ? ', ' + firstName : '') + '!';
+          const p = document.createElement('p');
+          p.textContent = source === 'ai_chat'
+            ? 'Cody has your whole conversation and will reach out soon. Need it faster? Call or text 740-319-2431.'
+            : 'Your request is in. Cody will reach out soon. Need it faster? Call or text 740-319-2431.';
+          const a = document.createElement('a');
+          a.href = 'tel:+17403192431'; a.className = 'btn-primary'; a.textContent = 'Call Now';
+          box.append(h, p, a);
+          (document.getElementById('quoteCard') || form).replaceChildren(box);
+          box.focus();
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          statusEl.className += ' err';
+          statusEl.textContent = (err && err.message && err.message !== 'send failed' && err.message.length < 160)
+            ? err.message
+            : 'Sorry, that didn’t send. Please call or text 740-319-2431, or email cody@grhwebsolutions.com.';
+        });
+    }
+    form.sendRequest = sendRequest;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+      status.className = 'form-status';
+      sendRequest(status, submit, 'form');
+    });
+
+    initAiHelper(form);
+  }
+
+  // ─── AI HELPER (optional, server-side DeepAI proxy) ───
+  function initAiHelper(form) {
+    const panel = document.getElementById('aiPanel');
+    const log = document.getElementById('aiLog');
+    const input = document.getElementById('aiInput');
+    const send = document.getElementById('aiSend');
+    const use = document.getElementById('aiUse');
+    const useStatus = document.getElementById('aiUseStatus');
+    const formToggle = document.getElementById('formToggle');
+    const sub = document.getElementById('quoteSub');
+    if (!panel) return;
+    const history = [];
+
+    function showForm(open) {
+      form.hidden = !open;
+      if (formToggle) formToggle.setAttribute('aria-expanded', String(open));
+    }
+
+    // Chat-first when the server has the assistant switched on; otherwise the form stays as is
+    fetch('chat.php?status=1', { headers: { 'Accept': 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (res) {
+        if (!res || !res.enabled) return;
+        panel.hidden = false;
+        showForm(false);
+        if (formToggle) formToggle.hidden = false;
+        if (sub) sub.textContent = 'Chat with Webster, our AI assistant, about your project. When you’re ready, Webster sends the whole conversation to Cody.';
+      })
+      .catch(function () {});
+
+    if (formToggle) {
+      formToggle.addEventListener('click', function () {
+        const open = form.hidden;
+        showForm(open);
+        if (open) form.querySelector('#q-name').focus();
+      });
+    }
+
+    let started = false;
+    function addMsg(text, who) {
+      const p = document.createElement('p');
+      p.className = 'ai-msg ' + (who === 'user' ? 'ai-user' : 'ai-bot');
+      p.textContent = text;
+      log.appendChild(p);
+      log.scrollTop = log.scrollHeight;
+      return p;
+    }
+
+    function ask() {
+      const text = input.value.trim();
+      if (!text || send.disabled) return;
+      input.value = '';
+      if (!started) { started = true; track('ai_chat_start', {}); }
+      addMsg(text, 'user');
+      history.push({ role: 'user', content: text });
+      const typing = addMsg('Thinking…', 'bot');
+      typing.classList.add('ai-typing');
+      send.disabled = true;
+      const body = new FormData();
+      // Send the whole conversation so Webster keeps context (server trims very long chats)
+      body.append('history', JSON.stringify(history.slice(-40)));
+      body.append('topic', form.querySelector('#q-topic').value || '');
+      fetch('chat.php', { method: 'POST', body: body, headers: { 'Accept': 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          typing.remove();
+          if (res && res.reply) {
+            addMsg(res.reply, 'bot');
+            history.push({ role: 'assistant', content: res.reply });
+            use.hidden = false;
+          } else {
+            addMsg((res && res.error) || 'Webster is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
+            showForm(true);
+          }
+        })
+        .catch(function () {
+          typing.remove();
+          addMsg('Webster is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
+          showForm(true);
+        })
+        .finally(function () { send.disabled = false; input.focus(); });
+    }
+    send.addEventListener('click', ask);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); ask(); }
+    });
+
+    // Sends the whole conversation to Cody. Name/email are optional here:
+    // Webster asks for contact details in the chat itself.
+    use.addEventListener('click', function () {
+      const transcript = history.map(function (m) {
+        return (m.role === 'user' ? 'Visitor: ' : 'Webster: ') + m.content;
+      }).join('\n');
+      form.querySelector('#q-chat').value = transcript.slice(0, 6000);
+      const msg = form.querySelector('#q-message');
+      if (!msg.value.trim()) {
+        msg.value = history.filter(function (m) { return m.role === 'user'; })
+          .map(function (m) { return m.content; }).join(' ').slice(0, 2000);
+      }
+      form.sendRequest(useStatus, use, 'ai_chat');
+    });
+  }
+
+  function track(name, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  }
+
   // ─── THROTTLE UTILITY ───
   function throttle(fn, limit) {
     var last = 0;
