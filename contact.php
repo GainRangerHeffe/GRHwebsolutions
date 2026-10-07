@@ -8,12 +8,12 @@ $json = grh_wants_json();
 function finish(bool $ok, string $error = '', int $code = 200): void {
     global $json;
     if ($json) grh_json($ok ? ['ok' => true] : ['ok' => false, 'error' => $error], $code);
-    header('Location: ' . ($ok ? 'thanks.html' : 'index.html?error=1#quote'), true, 303);
+    header('Location: ' . ($ok ? 'thanks.html' : '/?error=1#quote'), true, 303);
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.html#quote', true, 303);
+    header('Location: /#quote', true, 303);
     exit;
 }
 if (!grh_same_origin()) finish(false, 'Request blocked.', 403);
