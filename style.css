@@ -811,3 +811,54 @@ img { max-width: 100%; display: block; }
 .form-toggle[hidden] { display: none; }
 .form-toggle:hover { color: var(--accent); }
 .form-toggle[aria-expanded="true"] { color: var(--text-secondary); }
+
+/* ─── HERO HEADLINE + SLOGAN ─── */
+.hero-section h1 { font-size: clamp(2.2rem, 4.2vw, 3.4rem); margin-bottom: 14px; }
+.hero-slogan {
+  font-family: var(--font-serif); font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-weight: 600;
+  color: var(--text-primary); margin-bottom: 18px; letter-spacing: .3px;
+}
+.hero-slogan em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.about-ctas, .detail-ctas { margin-bottom: 0; }
+
+/* ─── SERVICE LANDING + BIO PAGES ─── */
+.content-section { padding: 88px 0; width: 100%; }
+.content-section.alt { background: var(--bg-mid); }
+.prose { max-width: 780px; margin: 0 auto; }
+.prose .section-tag { display: inline-block; margin-bottom: 16px; }
+.prose h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 18px; }
+.prose h3 { font-size: 1.1rem; font-family: var(--font-main); margin: 28px 0 12px; }
+.prose p, .prose li { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.8; }
+.prose p { margin-bottom: 16px; }
+.prose ul, .prose ol { padding-left: 1.3em; margin-bottom: 18px; }
+.prose li { margin-bottom: 8px; }
+.prose strong { color: var(--text-primary); font-weight: 600; }
+.prose a:not(.btn-primary):not(.btn-ghost) { color: var(--accent); }
+.step-list li { padding-left: 4px; }
+.price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 24px 0 24px; }
+.price-card {
+  background: var(--bg-light); border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius); padding: 24px 22px;
+}
+.prose .price-card h3 { margin: 0 0 8px; font-size: 1rem; color: var(--text-primary); }
+.price-amount { display: block; font-size: 1.55rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; line-height: 1.2; }
+.prose .price-card p { font-size: .92rem; line-height: 1.6; margin: 0; }
+.bio-grid { display: grid; grid-template-columns: 260px 1fr; gap: 56px; align-items: start; max-width: 1000px; margin: 0 auto; }
+.bio-photo { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.bio-facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; width: 100%; }
+.bio-facts li {
+  font-size: .92rem; color: var(--text-secondary); background: var(--bg-light);
+  border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 10px 14px;
+}
+.bio-facts strong { display: block; font-size: .72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
+.bio-text .hero-ctas { margin: 28px 0 0; }
+.bio-links { display: flex; flex-wrap: wrap; gap: 8px 24px; list-style: none; padding: 0 !important; }
+@media (max-width: 768px) {
+  .content-section { padding: 64px 0; }
+  .bio-grid { grid-template-columns: 1fr; gap: 36px; }
+  .bio-facts { max-width: 360px; }
+}

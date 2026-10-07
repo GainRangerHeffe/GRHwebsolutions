@@ -1,0 +1,20 @@
+# GRH Web Solutions
+# HTTPS is forced by Hostinger (hPanel > SSL > Force HTTPS); these rules only pick one host and one homepage URL.
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# www.grhwebsolutions.com -> grhwebsolutions.com
+RewriteCond %{HTTP_HOST} ^www\.grhwebsolutions\.com$ [NC]
+RewriteRule ^(.*)$ https://grhwebsolutions.com/$1 [R=301,L]
+
+# /index.html -> / (keeps any ?query; only matches what the browser asked for, so no loop)
+RewriteCond %{THE_REQUEST} ^[A-Z]+\s/index\.html[\s?] [NC]
+RewriteRule ^index\.html$ https://grhwebsolutions.com/ [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header set X-Content-Type-Options "nosniff"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
