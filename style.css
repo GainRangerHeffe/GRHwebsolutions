@@ -977,3 +977,11 @@ img { max-width: 100%; display: block; }
   .stack-name small { display: none; }
   .phase { grid-template-columns: 1fr; gap: 6px; }
 }
+
+/* ─── SECTION BACKGROUND IMAGERY ─── */
+.bg-defi { position: relative; background: linear-gradient(90deg, rgb(10 21 36 / .78) 0%, rgb(10 21 36 / .5) 50%, rgb(10 21 36 / .75) 100%), url(images/defi-chart.webp) center / cover no-repeat; border-top: 1px solid rgb(212 168 32 / .15); border-bottom: 1px solid rgb(212 168 32 / .15); }
+.page-hero.bg-collage { background: linear-gradient(180deg, rgb(10 21 36 / .7) 0%, rgb(10 21 36 / .82) 60%, var(--bg-dark) 100%), url(images/work-collage.webp) center / cover no-repeat; padding-bottom: 110px; }
+.method-section-flat.bg-phones { background: linear-gradient(90deg, rgb(13 30 50 / .96) 0%, rgb(13 30 50 / .82) 45%, rgb(13 30 50 / .4) 100%), url(images/showcase-phones.webp) right -160px center / 1000px auto no-repeat, var(--bg-mid); }
+@media (max-width: 860px) {
+  .method-section-flat.bg-phones { background: linear-gradient(180deg, rgb(13 30 50 / .8), rgb(13 30 50 / .96) 35%), url(images/showcase-phones.webp) center top / 140% auto no-repeat, var(--bg-mid); }
+}
