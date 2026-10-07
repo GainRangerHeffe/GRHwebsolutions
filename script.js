@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Posts the form and swaps it for a thank-you message. Used by the
-    // Send button and by the AI helper's "Send this chat" button.
+    // Send button and by Webster's "Send this chat" button.
     function sendRequest(statusEl, btn, source) {
       statusEl.className = statusEl.className.replace(/\s*(ok|err)\b/g, '');
       statusEl.textContent = 'Sending…';
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
         panel.hidden = false;
         showForm(false);
         if (formToggle) formToggle.hidden = false;
-        if (sub) sub.textContent = 'Chat with my AI assistant about your project. When you’re ready, it sends the whole conversation to Cody.';
+        if (sub) sub.textContent = 'Chat with Webster, our AI assistant, about your project. When you’re ready, Webster sends the whole conversation to Cody.';
       })
       .catch(function () {});
 
@@ -315,7 +315,8 @@ document.addEventListener('DOMContentLoaded', function () {
       typing.classList.add('ai-typing');
       send.disabled = true;
       const body = new FormData();
-      body.append('history', JSON.stringify(history.slice(-8)));
+      // Send the whole conversation so Webster keeps context (server trims very long chats)
+      body.append('history', JSON.stringify(history.slice(-40)));
       body.append('topic', form.querySelector('#q-topic').value || '');
       fetch('chat.php', { method: 'POST', body: body, headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.json(); })
@@ -326,13 +327,13 @@ document.addEventListener('DOMContentLoaded', function () {
             history.push({ role: 'assistant', content: res.reply });
             use.hidden = false;
           } else {
-            addMsg((res && res.error) || 'The assistant is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
+            addMsg((res && res.error) || 'Webster is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
             showForm(true);
           }
         })
         .catch(function () {
           typing.remove();
-          addMsg('The assistant is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
+          addMsg('Webster is unavailable right now. Please use the quick form below, or call or text 740-319-2431.', 'bot');
           showForm(true);
         })
         .finally(function () { send.disabled = false; input.focus(); });
@@ -343,10 +344,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Sends the whole conversation to Cody. Name/email are optional here:
-    // the helper asks for contact details in the chat itself.
+    // Webster asks for contact details in the chat itself.
     use.addEventListener('click', function () {
       const transcript = history.map(function (m) {
-        return (m.role === 'user' ? 'Visitor: ' : 'AI helper: ') + m.content;
+        return (m.role === 'user' ? 'Visitor: ' : 'Webster: ') + m.content;
       }).join('\n');
       form.querySelector('#q-chat').value = transcript.slice(0, 6000);
       const msg = form.querySelector('#q-message');

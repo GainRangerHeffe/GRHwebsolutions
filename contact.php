@@ -39,7 +39,7 @@ $topics = ['New website', 'Website redesign or fix', 'Social media management', 
 
 $fromChat = $chat !== '';
 if ($fromChat) {
-    // Sent straight from the AI helper: the conversation carries the context and
+    // Sent straight from Webster (the AI assistant): the conversation carries the context and
     // usually the visitor's contact details, so the form fields are optional.
     if ($name === '') $name = 'Website visitor (AI chat)';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $email = '';
@@ -52,7 +52,7 @@ if (!in_array($topic, $topics, true)) $topic = $fromChat ? 'AI chat' : 'Somethin
 if (preg_match_all('#https?://#i', $message . ' ' . $chat) > 3) finish(true);
 
 $subject = $fromChat
-    ? 'New AI chat lead' . ($topic !== 'AI chat' ? ': ' . $topic : '') . ($name !== 'Website visitor (AI chat)' ? ' from ' . $name : '')
+    ? 'New Webster chat lead' . ($topic !== 'AI chat' ? ': ' . $topic : '') . ($name !== 'Website visitor (AI chat)' ? ' from ' . $name : '')
     : 'New quote request: ' . $topic . ' from ' . $name;
 $lines = [
     "New request from grhwebsolutions.com",
@@ -69,7 +69,7 @@ if ($message !== '') {
 }
 if ($chat !== '') {
     $lines[] = "";
-    $lines[] = "Full AI helper conversation:";
+    $lines[] = "Full conversation with Webster:";
     $lines[] = $chat;
 }
 $lines[] = "";
