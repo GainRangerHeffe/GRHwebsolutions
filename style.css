@@ -985,3 +985,8 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .method-section-flat.bg-phones { background: linear-gradient(180deg, rgb(13 30 50 / .8), rgb(13 30 50 / .96) 35%), url(images/showcase-phones.webp) center top / 140% auto no-repeat, var(--bg-mid); }
 }
+.content-section.bg-compliance { background: linear-gradient(90deg, rgb(13 30 50 / .97) 0%, rgb(13 30 50 / .9) 45%, rgb(13 30 50 / .5) 100%), url(images/compliance-shield.webp) right -200px center / auto 100% no-repeat, var(--bg-mid); }
+.bg-compliance .method-card { background: rgb(13 30 50 / .82); }
+@media (max-width: 860px) {
+  .content-section.bg-compliance { background: linear-gradient(180deg, rgb(13 30 50 / .78), rgb(13 30 50 / .95) 40%), url(images/compliance-shield.webp) 75% top / auto 520px no-repeat, var(--bg-mid); }
+}
