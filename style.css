@@ -990,3 +990,8 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .content-section.bg-compliance { background: linear-gradient(180deg, rgb(13 30 50 / .78), rgb(13 30 50 / .95) 40%), url(images/compliance-shield.webp) 75% top / auto 520px no-repeat, var(--bg-mid); }
 }
+
+/* ─── PRICING PAGE ─── */
+.page-hero.bg-pricing { background: linear-gradient(180deg, rgb(10 21 36 / .8) 0%, rgb(10 21 36 / .9) 60%, var(--bg-dark) 100%), url(images/showcase-phones.webp) center 40% / 1100px auto no-repeat, var(--bg-dark); }
+.pricing-prose { max-width: 1100px; }
+.pricing-prose .price-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }

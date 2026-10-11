@@ -6,7 +6,7 @@ Contact: call or text 740-319-2431 · cody@grhwebsolutions.com · free quote and
 
 ## Pricing
 
-All website builds include basic Google SEO, schema markup and a mobile-first design. Domain names are $40 per year, paid separately. Full details: https://grhwebsolutions.com/services.html#pricing
+All website builds include basic Google SEO, schema markup and a mobile-first design. Domain names are $40 per year, paid separately. Full details: https://grhwebsolutions.com/pricing.html
 
 - Static website (fixed pages, fast and inexpensive to host): $500 for 3 pages, $750 for 5 pages, $100 for each additional page.
 - Server website (database, login or admin panel, bookings, AI chatbot): $3,000 for 5 pages, $100 for each additional page.
