@@ -14,7 +14,7 @@ All website builds include basic Google SEO, schema markup and a mobile-first de
 - Hosting: $40 per month (SSL, speed tests, basic analytics, 1 free domain email, $10 per additional address).
 - Maintenance: $100 per month (malware prevention and monitoring, security monitoring). Sites built by others: $1,000 up front, then $100 per month.
 - Social media management: $125 per month per platform (posting, engagement, Google Business Profile management).
-- Social media marketing: $250 per month per platform (growth strategy and paid advertising, including Google Ads). Platforms: Facebook, Instagram, TikTok, X, Google, eBay. Ad spend is paid directly to the platform.
+- Social media marketing: $250 per month per platform (growth strategy and paid advertising, including Google Ads). Separate from management; both on one platform is $375 per month. Platforms: Facebook, Instagram, TikTok, X, Google, eBay. Ad spend is paid directly to the platform.
 - AI chatbot: $1,500 setup plus $75 per month. Automations (lead follow-up, CRM, email and calendar): from $750 per workflow.
 - iOS and Android apps: quoted per project (priced per platform).
 - DeFi education: free 15-minute consultation, then $40 per hour. Educational only, not financial advice.
