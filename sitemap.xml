@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://grhwebsolutions.com/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://grhwebsolutions.com/about.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://grhwebsolutions.com/services.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://grhwebsolutions.com/web-design-erie-pa.html</loc>
@@ -31,5 +31,9 @@
   <url>
     <loc>https://grhwebsolutions.com/methodology.html</loc>
     <lastmod>2026-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://grhwebsolutions.com/pricing.html</loc>
+    <lastmod>2026-10-11</lastmod>
   </url>
 </urlset>
