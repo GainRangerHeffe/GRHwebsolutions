@@ -6,13 +6,20 @@ Contact: call or text 740-319-2431 · cody@grhwebsolutions.com · free quote and
 
 ## Pricing
 
-Every project is quoted individually after a free 15-minute consultation. Typical ranges:
+All website builds include basic Google SEO, schema markup and a mobile-first design. Domain names are $40 per year, paid separately. Full details: https://grhwebsolutions.com/services.html#pricing
 
-- Simple static website: $350–$750
-- Website that needs a server (logins, databases, booking, online stores, custom back end): $1,000–$5,000+
-- iOS and Android apps: $2,000–$4,000 each (per platform)
-- Social media management: monthly, priced by number of platforms and posting frequency
-- AI chatbots and automation: priced by project
+- Static website (fixed pages, fast and inexpensive to host): $500 for 3 pages, $750 for 5 pages, $100 for each additional page.
+- Server website (database, login or admin panel, bookings, AI chatbot): $3,000 for 5 pages, $100 for each additional page.
+- E-commerce website: starting at $6,500.
+- Hosting: $40 per month (SSL, speed tests, basic analytics, 1 free domain email, $10 per additional address).
+- Maintenance: $100 per month (malware prevention and monitoring, security monitoring). Sites built by others: $1,000 up front, then $100 per month.
+- Social media management: $125 per month per platform (posting, engagement, Google Business Profile management).
+- Social media marketing: $250 per month per platform (growth strategy and paid advertising, including Google Ads). Platforms: Facebook, Instagram, TikTok, X, Google, eBay. Ad spend is paid directly to the platform.
+- AI chatbot: $1,500 setup plus $75 per month. Automations (lead follow-up, CRM, email and calendar): from $750 per workflow.
+- iOS and Android apps: quoted per project (priced per platform).
+- DeFi education: free 15-minute consultation, then $40 per hour. Educational only, not financial advice.
+
+Terms: 50% deposit to start, 50% when the site goes live. 3 rounds of revisions included. Redesigns are quoted separately.
 
 Most websites launch in under two weeks.
 
