@@ -43,8 +43,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
-    <link rel="stylesheet" href="style.css?v=20261011a">
-    <script src="script.js?v=20261011a" defer></script>
+    <link rel="stylesheet" href="style.css?v=20261022a">
+    <script src="script.js?v=20261022a" defer></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -124,6 +124,19 @@
               {
                 "@type": "Offer",
                 "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "minPrice": "3000",
+                  "priceCurrency": "USD"
+                },
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "iOS or Android App",
+                  "url": "https://grhwebsolutions.com/pricing.html"
+                }
+              },
+              {
+                "@type": "Offer",
+                "priceSpecification": {
                   "@type": "UnitPriceSpecification",
                   "price": "40",
                   "priceCurrency": "USD",
@@ -139,7 +152,7 @@
                 "@type": "Offer",
                 "priceSpecification": {
                   "@type": "UnitPriceSpecification",
-                  "price": "100",
+                  "price": "125",
                   "priceCurrency": "USD",
                   "unitText": "MON"
                 },
@@ -174,7 +187,8 @@
                 "itemOffered": {
                   "@type": "Service",
                   "name": "Social Media Marketing (per platform)",
-                  "url": "https://grhwebsolutions.com/pricing.html"
+                  "url": "https://grhwebsolutions.com/pricing.html",
+                  "description": "Separate from management. eBay marketing covers up to 250 items; 251 to 500 items is $500 per month."
                 }
               },
               {
@@ -250,7 +264,7 @@
               "name": "Can you maintain a website you didn't build?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. GRH can take over a site it didn't build for $1,000 up front plus $100 per month."
+                "text": "Yes. GRH can take over a site it didn't build for $1,000 up front plus $125 per month."
               }
             },
             {
@@ -311,51 +325,145 @@
 
         <section id="pricing" class="content-section" aria-labelledby="pricing-heading">
             <div class="container">
-                <div class="prose pricing-prose">
+                <div class="pricing-wrap">
                     <h2 id="pricing-heading" class="sr-only">Prices</h2>
-                    <div class="price-grid">
-                        <div class="price-card">
-                            <h3>Static website</h3>
-                            <span class="price-amount">From $500</span>
-                            <p>3 pages for $500, 5 pages for $750, and $100 for each page after 5. A static site is a set of fixed pages: fast, secure and inexpensive to host.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>Server website</h3>
-                            <span class="price-amount">From $3,000</span>
-                            <p>5 pages for $3,000, then $100 for each page after 5. A server site runs code behind the scenes, so it can save form submissions to a database, offer a login or admin panel, take bookings, or power an AI chatbot.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>E-commerce website</h3>
-                            <span class="price-amount">From $6,500</span>
-                            <p>An online store with a product catalog, checkout and an admin panel so you can manage your own inventory.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>Hosting &amp; maintenance</h3>
-                            <span class="price-amount">$40 + $100 / month</span>
-                            <p>Hosting is $40 per month and includes SSL, speed tests, basic analytics and one free domain email ($10 per additional address). Maintenance is $100 per month and covers malware prevention and monitoring plus security monitoring. Domain names are $40 per year.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>Social media management</h3>
-                            <span class="price-amount">$125 / month per platform</span>
-                            <p>Posting, engagement and Google Business Profile management.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>Social media marketing</h3>
-                            <span class="price-amount">$250 / month per platform</span>
-                            <p>Growth strategy and paid advertising, including Google Ads. Sold separately from management: Facebook marketing plus management is $375 per month. Platforms: Facebook, Instagram, TikTok, X, Google and eBay. Ad spend is paid directly to the platform.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>AI chatbots &amp; automations</h3>
-                            <span class="price-amount">$1,500 + $75 / month</span>
-                            <p>A chatbot that answers visitor questions and captures leads. Automations such as lead follow-up and CRM, email and calendar workflows start at $750 per workflow.</p>
-                        </div>
-                        <div class="price-card">
-                            <h3>DeFi education</h3>
-                            <span class="price-amount">$40 / hour</span>
-                            <p>One-on-one sessions, with a free 15-minute consultation first. Educational only, not financial advice.</p>
-                        </div>
+                <section class="price-group" aria-labelledby="pg-web">
+                    <div class="price-group-head">
+                        <h3 id="pg-web">Websites &amp; apps</h3>
+                        <p>One-time build price. Basic Google SEO and schema markup included.</p>
                     </div>
-                    <p class="price-note">Website projects are 50% to start and 50% when the site goes live, with 3 rounds of revisions included. Redesigns of existing sites are quoted separately, and GRH can maintain a site it didn't build for $1,000 up front plus $100 per month. <a href="/#quote">Get a free quote</a>.</p>
+                    <div class="pcard-grid">
+                        <article class="pcard">
+                            <h4>Static website</h4>
+                            <p class="pcard-price"><span class="pcard-from">From</span><span class="pcard-amt">$500</span><span class="pcard-unit">3 pages</span></p>
+                            <ul class="pcard-list">
+                                <li>5 pages for $750</li>
+                                <li>$100 for each page after 5</li>
+                                <li>Fixed pages: fast, secure and inexpensive to host</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>Server website</h4>
+                            <p class="pcard-price"><span class="pcard-from">From</span><span class="pcard-amt">$3,000</span><span class="pcard-unit">5 pages</span></p>
+                            <ul class="pcard-list">
+                                <li>$100 for each page after 5</li>
+                                <li>Saves form submissions to a database</li>
+                                <li>Logins, admin panels, bookings or an AI chatbot</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>E-commerce website</h4>
+                            <p class="pcard-price"><span class="pcard-from">From</span><span class="pcard-amt">$6,500</span></p>
+                            <ul class="pcard-list">
+                                <li>Product catalog and checkout</li>
+                                <li>Admin panel to manage your own inventory</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>iPhone &amp; Android apps</h4>
+                            <p class="pcard-price"><span class="pcard-from">From</span><span class="pcard-amt">$3,000</span></p>
+                            <ul class="pcard-list">
+                                <li>Apple iOS and Android</li>
+                                <li>For your customers or your team</li>
+                                <li>Priced per platform</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+                <section class="price-group" aria-labelledby="pg-care">
+                    <div class="price-group-head">
+                        <h3 id="pg-care">Hosting &amp; care</h3>
+                        <p>Monthly plans that keep your site online, fast and safe.</p>
+                    </div>
+                    <div class="pcard-grid">
+                        <article class="pcard">
+                            <h4>Hosting</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$40</span><span class="pcard-unit">/ month</span></p>
+                            <ul class="pcard-list">
+                                <li>SSL certificate</li>
+                                <li>Speed tests and basic analytics</li>
+                                <li>1 free domain email ($10 per extra address)</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>Maintenance</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$125</span><span class="pcard-unit">/ month</span></p>
+                            <ul class="pcard-list">
+                                <li>Malware prevention and monitoring</li>
+                                <li>Security monitoring</li>
+                                <li>Sites GRH didn't build: $1,000 to take over</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>Domain name</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$40</span><span class="pcard-unit">/ year</span></p>
+                            <ul class="pcard-list">
+                                <li>Registered and renewed for you</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+                <section class="price-group" aria-labelledby="pg-social">
+                    <div class="price-group-head">
+                        <h3 id="pg-social">Social media</h3>
+                        <p>Priced per platform. Management and marketing are separate services and add up.</p>
+                    </div>
+                    <div class="pcard-grid">
+                        <article class="pcard">
+                            <h4>Management</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$125</span><span class="pcard-unit">/ month per platform</span></p>
+                            <ul class="pcard-list">
+                                <li>Posting and engagement</li>
+                                <li>Google Business Profile management</li>
+                            </ul>
+                        </article>
+                        <article class="pcard pcard-feature">
+                            <h4>Marketing</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$250</span><span class="pcard-unit">/ month per platform</span></p>
+                            <ul class="pcard-list">
+                                <li>Growth strategy</li>
+                                <li>Paid ads, including Google Ads</li>
+                                <li>Facebook, Instagram, TikTok, X, Google and eBay</li>
+                                <li><strong>eBay:</strong> up to 250 items. 251 to 500 items is double ($500 / month)</li>
+                            </ul>
+                            <p class="pcard-note">Ad spend is paid directly to the platform.</p>
+                        </article>
+                    </div>
+                </section>
+                <p class="price-example"><strong>Example:</strong> Facebook management ($125) plus Facebook marketing ($250) is <strong>$375 per month</strong>.</p>
+                <section class="price-group" aria-labelledby="pg-ai">
+                    <div class="price-group-head">
+                        <h3 id="pg-ai">AI, automation &amp; education</h3>
+                    </div>
+                    <div class="pcard-grid">
+                        <article class="pcard">
+                            <h4>AI chatbot</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$1,500</span><span class="pcard-unit">+ $75 / month</span></p>
+                            <ul class="pcard-list">
+                                <li>Answers visitor questions 24/7</li>
+                                <li>Captures leads for you</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>Automations</h4>
+                            <p class="pcard-price"><span class="pcard-from">From</span><span class="pcard-amt">$750</span><span class="pcard-unit">per workflow</span></p>
+                            <ul class="pcard-list">
+                                <li>Lead follow-up</li>
+                                <li>CRM, email and calendar workflows</li>
+                            </ul>
+                        </article>
+                        <article class="pcard">
+                            <h4>DeFi education</h4>
+                            <p class="pcard-price"><span class="pcard-amt">$40</span><span class="pcard-unit">/ hour</span></p>
+                            <ul class="pcard-list">
+                                <li>Free 15-minute consultation first</li>
+                                <li>One-on-one sessions</li>
+                                <li>Educational only, not financial advice</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+                    <p class="price-note">Website projects are 50% to start and 50% when the site goes live, with 3 rounds of revisions included. Redesigns of existing sites are quoted separately, and GRH can maintain a site it didn't build for $1,000 up front plus $125 per month. <a href="/#quote">Get a free quote</a>.</p>
                 </div>
             </div>
         </section>
@@ -381,7 +489,7 @@
                     </details>
                     <details class="faq-item">
                         <summary><h3>Can you maintain a website you didn't build?</h3></summary>
-                        <p>Yes. GRH can take over a site it didn't build for $1,000 up front plus $100 per month.</p>
+                        <p>Yes. GRH can take over a site it didn't build for $1,000 up front plus $125 per month.</p>
                     </details>
                     <details class="faq-item">
                         <summary><h3>Is ad spend included in social media marketing?</h3></summary>
