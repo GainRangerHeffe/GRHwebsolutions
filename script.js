@@ -359,8 +359,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Meta Pixel names for the GA events that matter for ads
+  const META_EVENTS = { generate_lead: 'Lead', click_call: 'Contact', click_text: 'Contact' };
+
   function track(name, params) {
     if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+    const metaName = META_EVENTS[name];
+    if (metaName && typeof window.fbq === 'function') {
+      const p = params || {};
+      window.fbq('track', metaName, name === 'generate_lead'
+        ? { content_name: p.topic || '', content_category: p.method === 'ai_chat' ? 'Webster chat' : 'Quote form' }
+        : { content_name: name === 'click_call' ? 'Call' : 'Text' });
+    }
   }
 
   // ─── THROTTLE UTILITY ───
